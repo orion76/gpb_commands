@@ -1,0 +1,7 @@
+name: 'gpb_commands'
+type: module
+description: 'Drupal commands module'
+core_version_requirement: ^8.9 || ^9
+package: 'gpb'
+dependencies:
+  - drupal:jsonapi

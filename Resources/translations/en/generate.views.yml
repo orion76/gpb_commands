@@ -1,0 +1,12 @@
+description: 'Drupal Console generated command.'
+help: '@todo Help'
+options:
+  entity-type: 'Entity type'
+  views-page-path: 'View page path'
+  menu-root: 'Menu name'
+  menu-parent: 'Parent menu name'
+arguments: {}
+messages:
+    success: 'Views is generated'
+questioins:
+  select-children: 'Select children?'

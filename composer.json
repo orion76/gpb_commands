@@ -1,0 +1,13 @@
+{
+    "name": "drupal/gpb_commands",
+    "type": "drupal-module",
+    "description": "Drupal commands module",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/gpb_commands",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/gpb_commands",
+        "source": "http://cgit.drupalcode.org/gpb_commands"
+    }
+}

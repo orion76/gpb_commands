@@ -1,0 +1,73 @@
+parameters:
+  settings.entity_share.export:
+    directories:
+      root: 'content_dump'
+      data: 'entities'
+
+services:
+
+
+  logger.channel.gpb_commands:
+    parent: logger.channel_base
+    arguments: [ 'gpb_commands' ]
+
+  gpb_commands.generate_views:
+    class: Drupal\gpb_commands\Command\GenerateViewsCommand
+    arguments:
+      - '@gpb_commands.generate_views_generator'
+      - '@entity_type.manager'
+      - '@console.string_converter'
+      - '@plugin.manager.menu.link'
+      - '@menu.tree_storage'
+      - '@console.extension_manager'
+      - '@console.validator'
+      - '@renderer'
+    tags:
+      - { name: drupal.command }
+
+  gpb_commands.generate_views_generator:
+    class: Drupal\gpb_commands\Generator\GenerateViewsGenerator
+    arguments: [ '@console.extension_manager' ]
+    tags:
+      - { name: drupal.generator }
+  gpb_commands.gpb_update_entities:
+    class: Drupal\gpb_commands\Command\Update\EntitiesCommand
+    arguments:
+      - '@state'
+      - '@entity.definition_update_manager'
+      - '@console.chain_queue'
+
+    tags:
+      - { name: drupal.command }
+  gpb_commands.entity_update:
+    class: Drupal\gpb_commands\Services\EntityUpdateInfo
+    arguments:
+      - '@entity_type.manager'
+      - '@entity.definition_update_manager'
+      - '@entity.last_installed_schema.repository'
+      - '@entity_type.bundle.info'
+      - '@entity_field.manager'
+  gpb_commands.gpb_sql_dump:
+    class: Drupal\gpb_commands\Command\SqlDumpCommand
+    arguments:
+      - '@app.root'
+      - '@console.shell_process'
+      - '@database'
+    tags:
+      - { name: drupal.command }
+  gpb_commands.gpb_sql_restore:
+    class: Drupal\gpb_commands\Command\SqlRestoreCommand
+    arguments:
+      - '@app.root'
+      - '@console.shell_process'
+      - '@database'
+    tags:
+      - { name: drupal.command }
+
+  gpb_commands.entity_delete:
+    class: Drupal\gpb_commands\Command\EntityDeleteCommand
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.gpb_commands'
+    tags:
+      - { name: drupal.command }

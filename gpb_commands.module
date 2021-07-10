@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains gpb_commands.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function gpb_commands_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the gpb_commands module.
+    case 'help.page.gpb_commands':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Drupal commands module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
