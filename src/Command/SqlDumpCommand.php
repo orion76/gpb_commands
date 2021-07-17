@@ -109,9 +109,8 @@ class SqlDumpCommand extends Command {
     );
 
     try {
-      $process = Process::fromShellCommandline($command);
+      $process = new Process($command,$this->backupDir);
       $process->setTimeout(NULL);
-      $process->setWorkingDirectory($this->backupDir);
       $process->run();
 
       if ($process->isSuccessful()) {

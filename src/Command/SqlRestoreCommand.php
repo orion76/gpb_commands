@@ -154,9 +154,9 @@ class SqlRestoreCommand extends Command {
 
     foreach ($commands as $command) {
 
-      $process = Process::fromShellCommandline($command);
+      $process = new Process($command);
       $process->setTimeout(NULL);
-      $process->setWorkingDirectory($this->rootDir);
+      $process->setWorkingDirectory($this->backupDir);
       $process->setTty($input->isInteractive());
       $process->run();
 
